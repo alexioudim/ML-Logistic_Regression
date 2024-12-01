@@ -6,43 +6,43 @@ import numpy as np
 import logistic_regression as lr
 import time
 
-# Load the dataset
+# Φόρτωση του συνόλου δεδομένων
 data = datasets.load_breast_cancer()
 X, y = data.data, data.target
-accuracies = []
+precisions = []
 
-# Start counting
+# Έναρξη χρονομέτρησης      
 start_time = time.time()
 for _ in range(20):
-    # Split the dataset
+    # Διάσπαση του συνόλου δεδομένων
     x_train, x_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=0.3)
 
-    # Normalize the data
+    # Κανονικοποίηση των δεδομένων
     scaler = preprocessing.StandardScaler()
     x_train = scaler.fit_transform(x_train)
     x_test = scaler.transform(x_test)
 
-    # Create the model
+    # Δημιουργία του μοντέλου
     model = lr.LogisticRegressionE34()
 
-    # Train the model
+    # Εκπαίδευση    
     model.fit(x_train, y_train, batch_size=64)
 
-    # Test the model's effectiveness
+    # Αξιολόγηση της ευστοχίας
     y_pred = model.predict(x_test) >= 0.5
-    accuracy = metrics.accuracy_score(y_test, y_pred)
-    accuracies.append(accuracy)
-    print (f"Accuracy: {accuracy}")
+    precision = metrics.precision_score(y_test, y_pred)
+    precisions.append(precision)
+    print (f"Precision: {precision}")
 
-# Stop counting
+# Τέλος χρονομέτρησης
 end_time = time.time()
 
-# Calculate the results
-mean_accuracy = np.mean(accuracies)
-std_accuracy = np.std(accuracies)
+# Υπολογισμός
+mean_precision = np.mean(precisions)
+std_precision = np.std(precisions)
 execution_time = end_time - start_time
 
-# Print results
-print(f"Mean accuracy: {mean_accuracy}")
-print(f"Standard deviation of accuracy: {std_accuracy}")
+# Εμφάνιση αποτελεσμάτων
+print(f"Mean precision: {mean_precision}")
+print(f"Standard deviation of precision: {std_precision}")
 print(f"Execution time: {execution_time}")
