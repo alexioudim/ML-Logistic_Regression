@@ -17,4 +17,3 @@ model = lr.LogisticRegressionE34()
 # Train the model
 model.fit(x_train, y_train, show_line=True, batch_size=None)
 
-        

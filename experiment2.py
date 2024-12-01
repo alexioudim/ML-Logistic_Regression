@@ -9,7 +9,7 @@ import time
 # Φόρτωση του συνόλου δεδομένων
 data = datasets.load_breast_cancer()
 X, y = data.data, data.target
-precisions = []
+accuracies = []
 
 # Έναρξη χρονομέτρησης      
 start_time = time.time()
@@ -30,19 +30,19 @@ for _ in range(20):
 
     # Αξιολόγηση της ευστοχίας
     y_pred = model.predict(x_test) >= 0.5
-    precision = metrics.precision_score(y_test, y_pred)
-    precisions.append(precision)
-    print (f"Precision: {precision}")
+    accuracy = metrics.precision_score(y_test, y_pred)
+    accuracies.append(accuracy)
+    print (f"Accuracy: {accuracy}")
 
 # Τέλος χρονομέτρησης
 end_time = time.time()
 
 # Υπολογισμός
-mean_precision = np.mean(precisions)
-std_precision = np.std(precisions)
+mean_accuracy = np.mean(accuracies)
+std_accuracy = np.std(accuracies)
 execution_time = end_time - start_time
 
 # Εμφάνιση αποτελεσμάτων
-print(f"Mean precision: {mean_precision}")
-print(f"Standard deviation of precision: {std_precision}")
+print(f"Mean accuracy: {mean_accuracy}")
+print(f"Standard deviation of accuracy: {std_accuracy}")
 print(f"Execution time: {execution_time}")
