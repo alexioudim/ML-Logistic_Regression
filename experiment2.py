@@ -30,7 +30,7 @@ for _ in range(20):
 
     # Αξιολόγηση της ευστοχίας
     y_pred = model.predict(x_test) >= 0.5
-    accuracy = metrics.precision_score(y_test, y_pred)
+    accuracy = metrics.accuracy_score(y_test, y_pred)
     accuracies.append(accuracy)
     print (f"Accuracy: {accuracy}")
 
