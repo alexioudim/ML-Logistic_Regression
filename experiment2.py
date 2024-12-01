@@ -5,14 +5,13 @@ from sklearn import preprocessing
 import numpy as np
 import logistic_regression as lr
 import time
-import platform
-import psutil
 
 # Load the dataset
 data = datasets.load_breast_cancer()
 X, y = data.data, data.target
 accuracies = []
 
+# Start counting
 start_time = time.time()
 for _ in range(20):
     # Split the dataset
@@ -35,11 +34,12 @@ for _ in range(20):
     accuracies.append(accuracy)
     print (f"Accuracy: {accuracy}")
 
+# Stop counting
 end_time = time.time()
 
+# Calculate the results
 mean_accuracy = np.mean(accuracies)
 std_accuracy = np.std(accuracies)
-
 execution_time = end_time - start_time
 
 # Print results

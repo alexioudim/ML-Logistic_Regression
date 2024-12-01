@@ -4,10 +4,15 @@ from sklearn import metrics
 from sklearn import preprocessing
 from sklearn import linear_model
 import numpy as np
+import time
 
 # Load the dataset
 data = datasets.load_breast_cancer()
 X, y = data.data, data.target
+accuracies = []
+
+# Start counting
+start_time = time.time()
 
 for _ in range(20):
     # Split the dataset
@@ -27,5 +32,19 @@ for _ in range(20):
     # Test the model's effectiveness
     y_pred = model.predict(x_test) >= 0.5
     accuracy = metrics.accuracy_score(y_test, y_pred)
+    accuracies.append(accuracy)
     print (f"Accuracy: {accuracy}")
+
+# Stop counting
+end_time = time.time()
+
+# Calculate the results
+mean_accuracy = np.mean(accuracies)
+std_accuracy = np.std(accuracies)
+execution_time = end_time - start_time
+
+# Print results
+print(f"Mean accuracy: {mean_accuracy}")
+print(f"Standard deviation of accuracy: {std_accuracy}")
+print(f"Execution time: {execution_time}")
 
